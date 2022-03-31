@@ -1,5 +1,6 @@
 import React from "react";
 import { nanoid } from "nanoid";
+import {Container} from "../Contacts/Contacts.styled"
 
 
 import Title from "../Title/Title";
@@ -46,26 +47,25 @@ class App extends React.Component {
 
     return contacts.filter(contact => (contact.name.toLowerCase().includes(normalizedFilter)))
   }
-
-  getDeleteElement = (idElem) => {
-    this.setState(prevState => ({
-    contacts: prevState.contacts.filter(contact => contact.id !== idElem),
-  }));
-  } 
   
 
   render() {
     const { filter } = this.state
     const visibleFilter = this.getVisibleFilter()
-    const deleteElement = this.getDeleteElement(idElem)
+    
 
     return (
       <section>
         <Title title='Phonebook' />
         <Form onSubmit={this.formSubmitHandler} />
-        <Title title='Contacts' />
-        <Filter filter={filter} onChange={this.changeFilterHandler}/>
-        <Contacts contacts={visibleFilter} deleteElement={deleteElement}/> 
+        <Container>
+          <div> 
+            <Title title='Contacts' />
+            <Filter filter={filter} onChange={this.changeFilterHandler}/>
+          </div>
+          
+          <Contacts contacts={visibleFilter} />
+        </Container>  
       </section>
     )
   }

@@ -1,24 +1,19 @@
 import React from "react";
-import {Label,Ul,Input,Box,Button} from "../Contacts/Contacts.styled"
+import {Ul, Li, Box, Button, P} from "../Contacts/Contacts.styled"
 
-const Contacts = ({ contacts }) => {
+const Contacts = ({ contacts, removeContact }) => {
     return (
             <Box>
                 <Ul>
                     {contacts.map(contact => {
                         return (
-                            <li key={contact.id}>
-                                <Label>
-                                    <Input type="checkbox" />
-                                     <p>{`${contact.name}: ${contact.number}`}</p>
-                                   
-                                </Label>
-                            </li>
+                            <Li key={contact.id}>
+                                <P>{contact.name}: {contact.number}</P>
+                                <Button type="button" onClick={() => removeContact(contact.id)}>Delete</Button>  
+                            </Li>
                         )
                     })}
                 </Ul>
-                
-                <Button type="button">Delete</Button>  
             </Box>
     );
 }

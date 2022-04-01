@@ -47,11 +47,17 @@ class App extends React.Component {
 
     return contacts.filter(contact => (contact.name.toLowerCase().includes(normalizedFilter)))
   }
-  
+
+  removeContact = index => {
+  this.setState(prevState => ({
+    contacts: prevState.contacts.filter(contact => contact.id !== index),
+  }));
+};
 
   render() {
     const { filter } = this.state
     const visibleFilter = this.getVisibleFilter()
+    
     
 
     return (
@@ -64,7 +70,7 @@ class App extends React.Component {
             <Filter filter={filter} onChange={this.changeFilterHandler}/>
           </div>
           
-          <Contacts contacts={visibleFilter} />
+          <Contacts contacts={visibleFilter} removeContact={this.removeContact} />
         </Container>  
       </section>
     )
